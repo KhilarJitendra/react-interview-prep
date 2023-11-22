@@ -1,7 +1,6 @@
 {
   "index": "Introduction",
-  "another": "Another Page",
-  "advanced": "Advanced (A Folder)",
+  "basics": "React Intro",
   "about": {
     "title": "About",
     "type": "page"

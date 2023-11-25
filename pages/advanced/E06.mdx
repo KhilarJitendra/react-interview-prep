@@ -1,0 +1,51 @@
+## E06
+
+### Micro Frontends
+
+Micro Frontends is an architectural style where a front-end application is decomposed into smaller, more manageable pieces, often referred to as micro frontends. Each micro frontend is a self-contained unit responsible for a specific feature or functionality. Micro frontends allow teams to work independently on different parts of a web application, making it easier to scale development and deployment.
+
+## Key Characteristics
+
+1. **Independent Deployment:**
+   Micro frontends can be developed, tested, and deployed independently of each other.
+
+2. **Technology Agnostic:**
+   Micro frontends can be built using different technologies and frameworks, allowing teams to choose the tools that best fit their needs.
+
+3. **Isolation:**
+   Micro frontends are isolated from each other, reducing the risk of one component affecting another.
+
+4. **Integration:**
+   There's a need for a mechanism to integrate these micro frontends into a cohesive user interface.
+
+## Frameworks for Micro Frontends
+
+### Single-spa
+
+- **Description:**
+  Single-spa is a JavaScript framework that allows you to build micro frontends using different frameworks (React, Angular, Vue, etc.) and integrate them into a single-page application.
+
+- **Key Features:**
+  - Framework-agnostic
+  - Dynamic loading of micro frontends
+  - Supports different routing strategies
+
+### Module Federation (Webpack 5+)
+
+- **Description:**
+  Module Federation is a feature introduced in Webpack 5 that enables the dynamic loading and execution of code from other bundles, supporting the development of micro frontends.
+
+- **Key Features:**
+  - Native Webpack support
+  - Dynamic loading of modules
+  - Easy sharing of code between micro frontends
+
+### qiankun
+
+- **Description:**
+  qiankun is a framework-agnostic micro frontend library for building applications composed of separately developed and deployed microservices.
+
+- **Key Features:**
+  - Supports multiple frameworks
+  - Provides sandboxing for isolated execution
+  - Simplifies communication between micro frontends

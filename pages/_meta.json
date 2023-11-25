@@ -1,6 +1,11 @@
 {
   "index": "Introduction",
-  "basics": "React Intro",
+  "intro": "React Intro",
+  "basics": "React Basics",
+  "advanced": "React Advanced",
+  "ts": "React Typescript",
+  "next": "Next JS",
+  "webpack": "Webpack",
   "about": {
     "title": "About",
     "type": "page"

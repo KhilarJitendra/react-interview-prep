@@ -1,0 +1,41 @@
+## E03: Understanding How React Works
+
+React, in its purest form, is a library for building user interfaces. It's so simple that the entire mental model can be represented as a formula: `v = f(s)` – where your view is simply a function of your state.
+
+To better answer this, let's go back one step further and start from first principles.
+
+### What is Rendering?
+
+Put simply, rendering is just a fancy way of saying that React calls your function component with the intent of eventually updating the View. Imagine it as a dynamic process, where React orchestrates a series of steps, almost like an animated sequence, to transform your application's state into a visually updated user interface.
+
+When React renders a component, two things happen.
+
+First, React creates a snapshot of your component which captures everything React needs to update the view at that particular moment in time. Props, state, event handlers, and a description of the UI (based on those props and state) are all captured in this snapshot.
+
+From there, React takes that description of the UI and uses it to update the View.
+
+In order to get the starting UI for your application, React will do an initial render, starting at the root of your application.
+
+### Batching: How React Calculates State
+
+React only re-rendering once it's taken into account every updater function inside of the event handler implies that React has some sort of internal algorithm it uses to calculate the new state. React refers to this algorithm as "batching."
+
+Thankfully, it's pretty straightforward.
+
+Whenever React encounters multiple invocations of the same updater function (e.g. setCount in our example), it will keep track of each of them, but only the result of the last invocation will be used as the new state.
+
+
+
+##### Internal Algorithm: (Diffing algorithm)
+
+React employs an internal algorithm to manage state updates and calculate the new state. While the specific name of this internal algorithm is not publicly disclosed, it plays a crucial role in determining how state changes are applied and when re-renders should occur. The batching mechanism is an integral part of this algorithm, ensuring that multiple state updates within the same synchronous block of code are grouped together and processed efficiently.
+
+
+```jsx
+const handleClick = () => {
+  setCount(1);
+  setCount(2);
+  setCount(3);
+};
+
+

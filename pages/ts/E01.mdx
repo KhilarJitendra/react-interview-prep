@@ -1,14 +1,144 @@
 ## E01
 
-## What is React?
+## What is TS ?
 
-React is a **JavaScript library** designed for constructing **user interfaces**. With React, developers can build reusable UI components and efficiently manage their state. The library is known for its declarative syntax, which simplifies the process of creating dynamic and interactive user interfaces. React optimizes updates through a virtual DOM, enhancing performance.
 
-React's key features include a component-based architecture, facilitating the development of scalable and maintainable applications. It is widely used for building modern web applications, and its large community contributes to a robust ecosystem of tools and resources.
+Ref - https://blog.bitsrc.io/react-with-typescript-cheatsheet-9dd891dc5bfe
 
- 
-## Why use React?
+```
 
-React is widely adopted in web development for its declarative syntax, fostering a clear expression of UI state, and its component-based architecture, promoting code modularity and scalability. The implementation of a virtual DOM ensures efficient updates, optimizing performance by selectively rendering changes to the actual DOM. React's one-way data binding simplifies data tracking, reducing bugs and easing debugging.
 
-Its active community provides ample resources, while React Native extends its capabilities to mobile development, allowing developers to apply React principles to native app creation. With SEO-friendly features and versatility, React stands out as a powerful and adaptable library for crafting modern and scalable user interfaces.
+// common types you may use for React props.
+
+import { useState } from "react"
+
+type Props = {
+    name: string, 
+    age?: number
+    title? : string[],
+    number?: boolean
+    role?: "admin" | "user" | "developer",
+    edu?: {
+        higher: string,
+        secondary: string,
+        school: string
+    }[],
+
+    onClick?: () => void,
+    onChange?: (target: string) => boolean,
+    handleSubmit?: (event: React.FormEvent<HTMLFormElement>) => void,
+    children: React.ReactNode
+}
+
+export const Counter = ( { name , age , number , children } : Props ) => {
+
+    const handleSubmit = (event: React.FormEvent) => {
+        console.log('clicked',event)
+    }
+    
+    return (
+        <>
+            <h1> my name is {name} and my age is {age} and roll number {number} </h1>
+            <button onClick={ (e) => handleSubmit(e) }>click me</button>
+            {children}
+        </>
+    )
+}
+
+
+// How to type React function components
+
+type funcProps = {
+    title: string
+}
+
+export const ShowTitle : React.FC<funcProps> = ( {title}  ) => {
+    return (
+        <h1>This is my {title} </h1>
+    )
+}
+
+
+// How to type React hooks
+
+type CounterValueUpdateProps = {
+    title?: string
+}
+
+export const CounterValueUpdate : React.FC<CounterValueUpdateProps> = (props) => {
+
+    const [count,setCount] = useState< number | 0 >(0)
+    const [title,setTitle] = useState(props.title);
+    const [title2,setTitle2] = useState< string | null >(null)
+
+    return (
+        <>
+            <h1 >This is a CounterValueUpdate </h1>
+            <button onClick={ () => { setTitle("Jitendra") }}>setTitle  {title} </button>
+            <button onClick={ () => { setTitle2("MR") }}>setTitle  {title2} </button>
+            <button onClick={ () => { setCount(count + 1) }}> click to add value {count} </button>
+        </>
+    )
+
+}
+
+/*
+
+Typing useEffect and useLayoutEffect hooks
+You don’t need to type the useEffect and useLayoutEffect hooks because they don’t deal with returning values. The cleanup function for the useEffect hook is not considered a value that can be changed either.
+
+*/
+
+// type theme = "dark" | "light"
+
+
+// How to type HTML events and forms
+
+
+type ButtonProps = {
+    children: React.ReactNode
+    onClick: () => void
+  }
+  const Button = ({ children, onClick }: ButtonProps) => {
+    return <button onClick={onClick}>{children}</button>
+  } 
+
+  type ButtonProps = {
+    children: React.ReactNode
+    onClick: () => void
+    disabled: boolean
+    type: 'button' | 'submit' | 'reset' | undefined 
+  }
+
+
+  // img 
+
+type ImgProps = React.ComponentPropsWithoutRef<"img">
+const Img = ({ src, loading }: ImgProps) => {
+  return <img src={src} loading={loading} />
+}
+
+
+// ComponentPropsWithoutRef<T>
+
+You only need to change the generic type of ComponentPropsWithoutRef<T> to extend different HTML elements. For example:
+
+ComponentPropsWithoutRef<'img'> to extend <img> element
+ComponentPropsWithoutRef<'button'> to extend <button> element
+ComponentPropsWithoutRef<'a'> to extend <a> element
+
+
+
+// ComponentPropsWithoutRef<T> with custom props
+
+interface ImgProps extends React.ComponentPropsWithoutRef<"img"> {
+    customProp: string;
+  }
+  const Img = ({ src, loading, customProp }: ImgProps) => {
+    // use the customProp here..
+    return <img src={src} loading={loading} />;
+  }
+
+
+
+```
